@@ -10,16 +10,16 @@ const routes = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Navigate to={"/posts"} replace />
+        element: <Navigate to={"/posts"} replace />,
       },
       {
         path: "/posts",
-        element: <PostsPage />
+        element: <PostsPage />,
       },
       {
         path: "/posts/:slug",
-        element: <PostPage />
-      }
+        element: <PostPage />,
+      },
     ],
   },
 ]);
