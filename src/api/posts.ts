@@ -10,3 +10,11 @@ export const fetchPosts = async () => {
 
   return response.json();
 }
+
+export const fetchPost = async (slug: string) => {
+  const response = await fetch(`${baseURL}/spaces/${space}/entries?${accesToken}&content_type=blogPosts&fields.slug=${slug}`);
+
+  if (!response.ok) throw new Error("Failed to fetch post");
+
+  return response.json();
+}
