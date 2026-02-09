@@ -1,4 +1,3 @@
-
 const baseURL = "https://cdn.contentful.com";
 const space = import.meta.env.VITE_SPACE;
 const accesToken = import.meta.env.VITE_ACCESS_TOKEN;
@@ -12,7 +11,7 @@ export const fetchPosts = async () => {
 }
 
 export const fetchPost = async (slug: string) => {
-  const response = await fetch(`${baseURL}/spaces/${space}/entries?${accesToken}&content_type=blogPosts&fields.slug=${slug}`);
+  const response = await fetch(`${baseURL}/spaces/${space}/entries?${accesToken}&content_type=blogPost&fields.slug=${slug}`);
 
   if (!response.ok) throw new Error("Failed to fetch post");
 
