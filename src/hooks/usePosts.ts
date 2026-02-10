@@ -10,6 +10,7 @@ type PostItem = {
       sys: { id: string; };
     };
     postTitle: string;
+    slug: string;
   };
 }
 
@@ -75,6 +76,7 @@ const usePosts = () => {
             image: asset?.fields.file.url
             ? `https:${asset.fields.file.url}`
             : null,
+            slug: post.fields.slug,
           }
         })
 
