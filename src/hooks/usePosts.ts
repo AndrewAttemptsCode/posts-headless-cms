@@ -11,6 +11,7 @@ type PostItem = {
     };
     postTitle: string;
     slug: string;
+    date: string;
   };
 }
 
@@ -73,6 +74,7 @@ const usePosts = () => {
               lastName: author?.fields.lastName || ""
             },
             title: post.fields.postTitle,
+            date: post.fields.date,
             image: asset?.fields.file.url
             ? `https:${asset.fields.file.url}`
             : null,
