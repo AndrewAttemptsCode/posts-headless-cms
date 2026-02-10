@@ -9,6 +9,7 @@ type PostItem = {
     postAuthor: {
       sys: { id: string; };
     };
+    postTitle: string;
   };
 }
 
@@ -40,6 +41,7 @@ type PostData = {
     firstName: string;
     lastName: string;
   };
+  title: string;
   image: string | null;
 }
 
@@ -69,6 +71,7 @@ const usePosts = () => {
               firstName: author?.fields.firstName || "Unknown",
               lastName: author?.fields.lastName || ""
             },
+            title: post.fields.postTitle,
             image: asset?.fields.file.url
             ? `https:${asset.fields.file.url}`
             : null,
