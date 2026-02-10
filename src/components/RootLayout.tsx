@@ -3,7 +3,7 @@ import Logo from "./Logo";
 
 const RootLayout = () => {
   return (
-    <div className="grid h-dvh grid-rows-[auto_1fr_auto] bg-gray-100 dark:bg-gray-700">
+    <div className="grid min-h-dvh grid-rows-[auto_1fr_auto] bg-gray-100 dark:bg-gray-700">
       <header>
         <Logo />
       </header>
