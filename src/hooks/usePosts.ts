@@ -6,6 +6,9 @@ type PostItem = {
     postHeroImage: {
       sys: { id: string; };
     };
+    postAuthor: {
+      sys: { id: string; };
+    };
   };
 }
 
@@ -16,14 +19,27 @@ type Asset = {
   };
 }
 
+type Author = {
+  sys: { id: string; }
+  fields: {
+    firstName: string;
+    lastName: string;
+  };
+}
+
 type FetchPostsResponse = {
   items: PostItem[];
   includes: {
     asset: Asset[];
+    entry: Author[];
   };
 }
 
 type PostData = {
+  author: {
+    firstName: string;
+    lastName: string;
+  };
   image: string | null;
 }
 
@@ -39,19 +55,27 @@ const usePosts = () => {
         const data: FetchPostsResponse = await fetchPosts();
 
         const assets = data.includes.asset;
+        const authors = data.includes.entry;
 
         const newPosts = data.items.map((post) => {
           const postImgId = post.fields.postHeroImage.sys.id;
           const asset = assets.find(asset => asset.sys.id === postImgId);
+          
+          const postAuthorId = post.fields.postAuthor.sys.id;
+          const author = authors.find(author => author.sys.id === postAuthorId);
 
           return {
+            author: {
+              firstName: author?.fields.firstName || "Unknown",
+              lastName: author?.fields.lastName || ""
+            },
             image: asset?.fields.file.url
             ? `https:${asset.fields.file.url}`
             : null,
           }
         })
 
-        // setPosts(newPosts);
+        setPosts(newPosts);
       } catch (err) {
         setError(err as Error);
       } finally {
@@ -59,7 +83,7 @@ const usePosts = () => {
       }
     }
 
-    // loadPosts();
+    loadPosts();
   }, []);
 
   return { posts, loading, error };
