@@ -1,6 +1,15 @@
 import { useEffect, useState } from "react"
 import { fetchPosts } from "../api/posts";
 
+type PostContent = {
+  content?: PostContent[];
+  value?: string;
+}
+
+type PostArticle = {
+  content: PostContent[]
+}
+
 type PostItem = {
   fields: {
     postHeroImage: {
@@ -12,6 +21,7 @@ type PostItem = {
     postTitle: string;
     slug: string;
     date: string;
+    postArticle: PostArticle;
   };
 }
 
@@ -33,8 +43,8 @@ type Author = {
 type FetchPostsResponse = {
   items: PostItem[];
   includes: {
-    asset: Asset[];
-    entry: Author[];
+    Asset: Asset[];
+    Entry: Author[];
   };
 }
 
@@ -44,7 +54,10 @@ type PostData = {
     lastName: string;
   };
   title: string;
+  date: string;
   image: string | null;
+  slug: string;
+  body: string[];
 }
 
 const usePosts = () => {
@@ -58,8 +71,8 @@ const usePosts = () => {
         setLoading(true);
         const data: FetchPostsResponse = await fetchPosts();
 
-        const assets = data.includes.asset;
-        const authors = data.includes.entry;
+        const assets = data.includes.Asset;
+        const authors = data.includes.Entry;
 
         const newPosts = data.items.map((post) => {
           const postImgId = post.fields.postHeroImage.sys.id;
@@ -68,6 +81,10 @@ const usePosts = () => {
           const postAuthorId = post.fields.postAuthor.sys.id;
           const author = authors.find(author => author.sys.id === postAuthorId);
 
+          const body = post.fields.postArticle.content.map(paragraph =>
+            paragraph.content?.map(textNode => textNode.value).join("") || ""
+          );
+
           return {
             author: {
               firstName: author?.fields.firstName || "Unknown",
@@ -75,6 +92,7 @@ const usePosts = () => {
             },
             title: post.fields.postTitle,
             date: post.fields.date,
+            body,
             image: asset?.fields.file.url
             ? `https:${asset.fields.file.url}`
             : null,
