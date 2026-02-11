@@ -1,5 +1,12 @@
+import PostsList from "../components/PostsList";
+
 const PostsPage = () => {
-  return <div>Posts Page</div>;
+
+  return (
+    <div>
+      <PostsList />
+    </div>
+  );  
 };
 
 export default PostsPage;
