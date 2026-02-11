@@ -63,7 +63,7 @@ type PostData = {
 const usePosts = () => {
   const [posts, setPosts] = useState<PostData[]>([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<Error | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const loadPosts = async () => {
@@ -102,7 +102,8 @@ const usePosts = () => {
 
         setPosts(newPosts);
       } catch (err) {
-        setError(err as Error);
+        console.error("fetchPosts Error:", err);
+        setError("Failed to fetch posts. Please try again.");
       } finally {
         setLoading(false);
       }
