@@ -1,44 +1,44 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 import { fetchPosts } from "../api/posts";
 
 type PostContent = {
   content?: PostContent[];
   value?: string;
-}
+};
 
 type PostArticle = {
-  content: PostContent[]
-}
+  content: PostContent[];
+};
 
 type PostItem = {
   fields: {
     postHeroImage: {
-      sys: { id: string; };
+      sys: { id: string };
     };
     postAuthor: {
-      sys: { id: string; };
+      sys: { id: string };
     };
     postTitle: string;
     slug: string;
     date: string;
     postArticle: PostArticle;
   };
-}
+};
 
 type Asset = {
-  sys: { id: string; };
+  sys: { id: string };
   fields: {
-    file: { url: string; };
+    file: { url: string };
   };
-}
+};
 
 type Author = {
-  sys: { id: string; }
+  sys: { id: string };
   fields: {
     firstName: string;
     lastName: string;
   };
-}
+};
 
 type FetchPostsResponse = {
   items: PostItem[];
@@ -46,9 +46,9 @@ type FetchPostsResponse = {
     Asset: Asset[];
     Entry: Author[];
   };
-}
+};
 
-type PostData = {
+export type PostData = {
   author: {
     firstName: string;
     lastName: string;
@@ -58,7 +58,7 @@ type PostData = {
   image: string | null;
   slug: string;
   body: string[];
-}
+};
 
 const usePosts = () => {
   const [posts, setPosts] = useState<PostData[]>([]);
@@ -76,29 +76,33 @@ const usePosts = () => {
 
         const newPosts = data.items.map((post) => {
           const postImgId = post.fields.postHeroImage.sys.id;
-          const asset = assets.find(asset => asset.sys.id === postImgId);
-          
-          const postAuthorId = post.fields.postAuthor.sys.id;
-          const author = authors.find(author => author.sys.id === postAuthorId);
+          const asset = assets.find((asset) => asset.sys.id === postImgId);
 
-          const body = post.fields.postArticle.content.map(paragraph =>
-            paragraph.content?.map(textNode => textNode.value).join("") || ""
+          const postAuthorId = post.fields.postAuthor.sys.id;
+          const author = authors.find(
+            (author) => author.sys.id === postAuthorId,
+          );
+
+          const body = post.fields.postArticle.content.map(
+            (paragraph) =>
+              paragraph.content?.map((textNode) => textNode.value).join("") ||
+              "",
           );
 
           return {
             author: {
               firstName: author?.fields.firstName || "Unknown",
-              lastName: author?.fields.lastName || ""
+              lastName: author?.fields.lastName || "",
             },
             title: post.fields.postTitle,
             date: post.fields.date,
             body,
             image: asset?.fields.file.url
-            ? `https:${asset.fields.file.url}`
-            : null,
+              ? `https:${asset.fields.file.url}`
+              : null,
             slug: post.fields.slug,
-          }
-        })
+          };
+        });
 
         setPosts(newPosts);
       } catch (err) {
@@ -107,12 +111,12 @@ const usePosts = () => {
       } finally {
         setLoading(false);
       }
-    }
+    };
 
     loadPosts();
   }, []);
 
   return { posts, loading, error };
-}
+};
 
 export default usePosts;
