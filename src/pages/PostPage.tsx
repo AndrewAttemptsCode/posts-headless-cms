@@ -1,9 +1,11 @@
-import { useParams } from "react-router-dom";
+import PostContent from "../components/PostContent";
 
 const PostPage = () => {
-  const { slug } = useParams();
-
-  return <div>Post Page - {slug}</div>;
+  return (
+    <div>
+      <PostContent />
+    </div>
+  );
 };
 
 export default PostPage;
