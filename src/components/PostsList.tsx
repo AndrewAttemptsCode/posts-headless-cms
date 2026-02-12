@@ -1,4 +1,5 @@
 import usePosts from "../hooks/usePosts";
+import ErrorDisplay from "./ErrorDisplay";
 import LoadingSpinner from "./LoadingSpinner";
 import PostCard from "./PostCard";
 
@@ -13,6 +14,8 @@ const PostsList = () => {
         </h2>
         {loading ? (
           <LoadingSpinner />
+        ) : error ? (
+          <ErrorDisplay error={error} />
         ) : (
           <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-4">
             {posts.map((post) => (
