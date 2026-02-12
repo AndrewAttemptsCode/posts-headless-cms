@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Logo from "./Logo";
+import FooterCredits from "./FooterCredits";
 
 const RootLayout = () => {
   return (
@@ -10,7 +11,9 @@ const RootLayout = () => {
       <main>
         <Outlet />
       </main>
-      <footer>footer content</footer>
+      <footer>
+        <FooterCredits />
+      </footer>
     </div>
   );
 };
