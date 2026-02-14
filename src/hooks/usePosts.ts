@@ -40,7 +40,7 @@ type Author = {
   };
 };
 
-type FetchPostsResponse = {
+export type FetchPostsResponse = {
   items: PostItem[];
   includes: {
     Asset: Asset[];
