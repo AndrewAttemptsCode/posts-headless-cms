@@ -69,6 +69,8 @@ const usePosts = () => {
     const loadPosts = async () => {
       try {
         setLoading(true);
+        setError(null);
+        
         const data: FetchPostsResponse = await fetchPosts();
 
         const assets = data.includes.Asset;
