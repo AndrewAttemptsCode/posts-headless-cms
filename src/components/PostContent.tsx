@@ -26,6 +26,8 @@ const PostContent = () => {
         <ErrorDisplay error={error} />
       ) : (
         <>
+          <title>{`${post.title}|Post`}</title>
+          <meta name="description" content={`A post about ${post.title}`} />
           <h2 className="text-2xl font-semibold">{post.title}</h2>
           <div className="mb-2 bg-gray-200 p-1 sm:p-2 dark:bg-gray-600">
             <p>
