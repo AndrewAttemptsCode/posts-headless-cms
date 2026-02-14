@@ -55,7 +55,7 @@ export type PostData = {
   };
   title: string;
   date: string;
-  image: string | null;
+  image: string;
   slug: string;
   body: string[];
 };
@@ -97,9 +97,7 @@ const usePosts = () => {
             title: post.fields.postTitle,
             date: post.fields.date,
             body,
-            image: asset?.fields.file.url
-              ? `https:${asset.fields.file.url}`
-              : null,
+            image: `https:${asset!.fields.file.url}`,
             slug: post.fields.slug,
           };
         });
