@@ -1,73 +1,76 @@
-# React + TypeScript + Vite
+# Posty - Contentful Headless CMS App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Posty is a headless CMS web application that displays a list of the latest posts retrieved from an external Contentful API. Selecting a post navigates to a dedicated article page, where content is passed via client-side routing state. Direct navigation using an article slug in the URL dynamically fetches and renders the corresponding article content.
 
-Currently, two official plugins are available:
+This project was built to practise and demonstrate modern front-end architecture using a headless CMS workflow. The primary focus was integrating and consuming the Contentful API, shaping external CMS data through custom hooks, and providing clean, reusable data consumption at the component level.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The project also served as practical experience in building responsive, accessible interfaces using Tailwind CSS, while reinforcing modern separation of concerns through a decoupled data flow pattern:
 
-## React Compiler
+API (data fetching) --> Custom Hook (data shaping) --> Component Consumption (UI rendering)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+**Live Site:**
+Posty
 
-## Expanding the ESLint configuration
+## Concepts & Architecture Practised
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Headless CMS data consumption
+- API data transformation and shaping
+- Custom hook data abstraction patterns
+- Decoupled data flow architecture
+- Component-driven UI development
+- Accessibility-first UI design
+- Responsive layout implementation
 
-```js
-export default defineConfig([
-  globalIgnores(["dist"]),
-  {
-    files: ["**/*.{ts,tsx}"],
-    extends: [
-      // Other configs...
+## Tech Stack
+- **Front End:** HTML, CSS, React, Tailwind CSS
+- **Language:** TypeScript
+- **Build / Dev Tools:** Vite, npm
+- **Other Tools / IDE:** VSCode, Prettier, Contentful
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Screenshots
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+### Light Mode:
+**Posts:**
+![light_posts](./public/light_posts.webp)
+
+**Post:**
+![light_post](./public/light_post.webp)
+
+### Dark Mode:
+**Posts:**
+![dark_posts](./public/dark_posts.webp)
+
+**Post:**
+![dark_post](./public/dark_post.webp)
+
+## Prerequisites
+- [Node.js](https://nodejs.org/) (v16 or higher recommended)
+
+### Environment Variables
+Within Contentful space:
+
+Settings Menu > API Keys > Select API Key name
+
+```bash
+VITE_ACCESS_TOKEN=<your_contentful_delivery_api_access_token>
+VITE_SPACE=<your_contentful_space_id>
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Installation
+```bash
+# Clone the repo
+git clone https://github.com/AndrewAttemptsCode/posts-headless-cms.git
 
-```js
-// eslint.config.js
-import reactX from "eslint-plugin-react-x";
-import reactDom from "eslint-plugin-react-dom";
+# Navigate into the folder
+cd project-name
 
-export default defineConfig([
-  globalIgnores(["dist"]),
-  {
-    files: ["**/*.{ts,tsx}"],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs["recommended-typescript"],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+# Install dependencies
+npm install
 ```
+
+## Running the app
+```bash
+# Start the development server
+npm run dev
+```
+
