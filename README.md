@@ -9,7 +9,7 @@ The project also served as practical experience in building responsive, accessib
 API (data fetching) --> Custom Hook (data shaping) --> Component Consumption (UI rendering)
 
 **Live Site:**
-Posty
+[Posty](https://posts-headless-cms.pages.dev/)
 
 ## Concepts & Architecture Practised
 
