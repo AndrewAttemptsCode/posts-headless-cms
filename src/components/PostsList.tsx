@@ -8,8 +8,14 @@ const PostsList = () => {
 
   return (
     <div className="flex flex-col py-4">
-      <section className="w-[90%] max-w-7xl self-center">
-        <h2 className="mb-2 text-2xl font-semibold text-gray-700 dark:text-gray-200">
+      <section
+        className="w-[90%] max-w-7xl self-center"
+        aria-labelledby="latest-posts"
+      >
+        <h2
+          id="latest-posts"
+          className="mb-2 text-2xl font-semibold text-gray-700 dark:text-gray-200"
+        >
           Latest Posts
         </h2>
         {loading ? (
