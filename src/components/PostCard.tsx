@@ -23,7 +23,7 @@ const PostCard = ({ post }: PostProps) => {
         <div className="absolute inset-0 bg-linear-to-b from-transparent from-60% to-black" />
 
         <div className="relative">
-          <h2>{post.title}</h2>
+          <h3>{post.title}</h3>
           <p className="text-white/80">
             {new Date(post.date).toLocaleDateString()}
           </p>
