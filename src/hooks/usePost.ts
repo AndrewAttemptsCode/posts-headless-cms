@@ -17,7 +17,7 @@ const usePost = (slug: string, existingPost: PostData) => {
         setLoading(true);
         setError(null);
 
-        const data:FetchPostResponse = await fetchPost(slug);
+        const data: FetchPostResponse = await fetchPost(slug);
 
         const asset = data.includes.Asset[0];
         const author = data.includes.Entry[0];
